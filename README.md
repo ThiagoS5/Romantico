@@ -54,9 +54,9 @@ O modal de Poesia consulta a Vercel Function `GET /api/trello-poems`. Cadastre e
 ```text
 TRELLO_API_KEY
 TRELLO_API_TOKEN
-TRELLO_POEMS_CARD_ID
+TRELLO_POEMS_BOARD_ID
 ```
 
 Não use o prefixo `VITE_`: essas credenciais devem existir somente no servidor. Para testar localmente com as Functions, use `npx vercel dev` depois de vincular o projeto e preencher `.env.local` a partir de `.env.example`.
 
-Na descrição do card, separe poemas com uma linha contendo `---`. Um título opcional pode ser escrito como `# Título do poema`; sem ele, a interface usa `Poema 1`, `Poema 2` e assim por diante.
+Cada card aberto do quadro representa um poema: o nome do card vira o título e a descrição vira o texto. Cards sem descrição são ignorados, e a ordem exibida acompanha a ordem dos cards no Trello.

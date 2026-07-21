@@ -3,8 +3,14 @@
 import { env } from 'node:process'
 
 type TrelloCard = {
+  id?: unknown
   name?: unknown
   desc?: unknown
+}
+
+type TrelloBoard = {
+  name?: unknown
+  cards?: unknown
 }
 
 type Poem = {
@@ -13,22 +19,25 @@ type Poem = {
   body: string
 }
 
-function splitPoems(description: string): Poem[] {
-  return description
-    .split(/\r?\n\s*(?:---|\*\*\*)\s*\r?\n/g)
-    .map((block) => block.trim())
-    .filter(Boolean)
-    .map((block, index) => {
-      const lines = block.split(/\r?\n/)
-      const heading = lines[0]?.match(/^#{1,6}\s+(.+)$/)?.[1]?.trim()
-      const body = heading ? lines.slice(1).join('\n').trim() : block
+export function mapBoardToPoems(board: TrelloBoard): Poem[] {
+  if (!Array.isArray(board.cards)) return []
 
-      return {
-        id: `poem-${index + 1}`,
-        title: heading || `Poema ${index + 1}`,
-        body,
-      }
-    })
+  return board.cards.flatMap((cardValue, index) => {
+    const card = cardValue as TrelloCard
+    const body = typeof card.desc === 'string' ? card.desc.trim() : ''
+
+    if (!body) return []
+
+    const title = typeof card.name === 'string' && card.name.trim()
+      ? card.name.trim()
+      : `Poema ${index + 1}`
+
+    return [{
+      id: typeof card.id === 'string' ? card.id : `poem-${index + 1}`,
+      title,
+      body,
+    }]
+  })
 }
 
 function json(data: unknown, status = 200, cacheControl = 'no-store') {
@@ -44,16 +53,18 @@ function json(data: unknown, status = 200, cacheControl = 'no-store') {
 export async function GET() {
   const apiKey = env.TRELLO_API_KEY
   const apiToken = env.TRELLO_API_TOKEN
-  const cardId = env.TRELLO_POEMS_CARD_ID
+  const boardId = env.TRELLO_POEMS_BOARD_ID
 
-  if (!apiKey || !apiToken || !cardId) {
+  if (!apiKey || !apiToken || !boardId) {
     return json({ code: 'TRELLO_NOT_CONFIGURED', message: 'Integração com o Trello ainda não configurada.' }, 503)
   }
 
-  const trelloUrl = new URL(`https://api.trello.com/1/cards/${encodeURIComponent(cardId)}`)
+  const trelloUrl = new URL(`https://api.trello.com/1/boards/${encodeURIComponent(boardId)}`)
   trelloUrl.searchParams.set('key', apiKey)
   trelloUrl.searchParams.set('token', apiToken)
-  trelloUrl.searchParams.set('fields', 'name,desc')
+  trelloUrl.searchParams.set('fields', 'name')
+  trelloUrl.searchParams.set('cards', 'open')
+  trelloUrl.searchParams.set('card_fields', 'id,name,desc,pos')
 
   try {
     const trelloResponse = await fetch(trelloUrl, {
@@ -65,14 +76,13 @@ export async function GET() {
       return json({ code: 'TRELLO_REQUEST_FAILED', message: 'Não foi possível carregar os poemas agora.' }, 502)
     }
 
-    const card = (await trelloResponse.json()) as TrelloCard
-    const description = typeof card.desc === 'string' ? card.desc : ''
-    const cardTitle = typeof card.name === 'string' ? card.name : 'Poemas'
+    const board = (await trelloResponse.json()) as TrelloBoard
+    const cardTitle = typeof board.name === 'string' ? board.name : 'Poemas'
 
     return json(
       {
         cardTitle,
-        poems: splitPoems(description),
+        poems: mapBoardToPoems(board),
       },
       200,
       'public, s-maxage=300, stale-while-revalidate=3600',
