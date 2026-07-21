@@ -1,4 +1,4 @@
-# Um convite para você
+# SimplesmenteEu
 
 Experiência romântica e interativa construída como um mergulho por seis motivos. Cada bolha abre um painel associado a uma URL compartilhável sem desmontar o oceano reativo ao fundo.
 

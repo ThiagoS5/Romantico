@@ -2,7 +2,7 @@
 
 ## Register
 
-brand
+SimplesmenteEu
 
 ## Users
 
