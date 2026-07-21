@@ -16,6 +16,9 @@ export function HomePage({ selectedSlug }: HomePageProps) {
         >
           Por que você deveria dar uma chance a mim?
         </h1>
+        <p className="invitation__challenge" tabIndex={0}>
+          Eai, mereço uma chance?
+        </p>
       </header>
       <BubbleField selectedSlug={selectedSlug} />
     </section>

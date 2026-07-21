@@ -352,6 +352,35 @@ img {
   opacity: 0.78;
 }
 
+.invitation__challenge {
+  margin: 0.8rem 0 0;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.5;
+  outline: none;
+  text-shadow: 0 2px 8px rgb(0 8 20 / 78%);
+}
+
+.invitation__challenge:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .invitation__challenge {
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 180ms ease-out, transform 180ms ease-out;
+  }
+
+  .invitation:hover .invitation__challenge,
+  .invitation__challenge:focus-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .bubble-field {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

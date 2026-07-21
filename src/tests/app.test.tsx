@@ -49,6 +49,7 @@ describe('ocean invitation', () => {
     renderRoute()
 
     expect(screen.getByRole('heading', { name: /por que você deveria dar uma chance a mim/i })).toBeVisible()
+    expect(screen.getByText('Eai, mereço uma chance?')).toHaveAttribute('tabindex', '0')
     expect(screen.getByRole('button', { name: /tocar música/i })).toBeVisible()
     expect(screen.getByRole('slider', { name: /volume da música/i })).toBeVisible()
     expect(screen.queryByText('Cada bolha guarda uma pequena resposta.')).not.toBeInTheDocument()
