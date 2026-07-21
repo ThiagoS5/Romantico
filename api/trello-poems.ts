@@ -1,3 +1,7 @@
+/// <reference types="node" />
+
+import { env } from 'node:process'
+
 type TrelloCard = {
   name?: unknown
   desc?: unknown
@@ -38,9 +42,9 @@ function json(data: unknown, status = 200, cacheControl = 'no-store') {
 }
 
 export async function GET() {
-  const apiKey = process.env.TRELLO_API_KEY
-  const apiToken = process.env.TRELLO_API_TOKEN
-  const cardId = process.env.TRELLO_POEMS_CARD_ID
+  const apiKey = env.TRELLO_API_KEY
+  const apiToken = env.TRELLO_API_TOKEN
+  const cardId = env.TRELLO_POEMS_CARD_ID
 
   if (!apiKey || !apiToken || !cardId) {
     return json({ code: 'TRELLO_NOT_CONFIGURED', message: 'Integração com o Trello ainda não configurada.' }, 503)
