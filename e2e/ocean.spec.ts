@@ -60,8 +60,13 @@ test('desktop keeps the invitation clear while a routed panel opens and closes',
   await page.goto('/')
 
   const invitation = page.locator('.invitation')
+  const invitationChallenge = page.getByText('Eai, mereço uma chance?')
   const invitationBox = await invitation.boundingBox()
   expect(invitationBox).not.toBeNull()
+  await expect(invitationChallenge).toHaveCSS('opacity', '0')
+
+  await invitation.hover()
+  await expect(invitationChallenge).toHaveCSS('opacity', '1')
 
   const bubbles = page.locator('[data-reason-bubble]')
   await expect(bubbles).toHaveCount(6)

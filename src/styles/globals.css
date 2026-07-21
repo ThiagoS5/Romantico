@@ -290,6 +290,13 @@ img {
 
 .invitation {
   width: 100%;
+  border-radius: 4px;
+  outline: none;
+}
+
+.invitation:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 8px;
 }
 
 .invitation__kicker {
@@ -362,7 +369,17 @@ img {
   font-size: 0.82rem;
   font-weight: 500;
   line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
   text-shadow: 0 2px 8px rgb(0 8 20 / 78%);
+  transform: translateY(-0.45rem);
+  transition: opacity 240ms ease-out, transform 240ms ease-out;
+}
+
+.invitation-group:hover .invitation__challenge,
+.invitation-group:focus-within .invitation__challenge {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .bubble-field {
@@ -1441,8 +1458,13 @@ img {
   .reason-bubble__shine,
   .reason-bubble__label,
   .bubble-preview,
+  .invitation__challenge,
   .reason-bubble::before {
     transition-duration: 60ms;
+  }
+
+  .invitation__challenge {
+    transform: none;
   }
 
   .reason-bubble__link:hover,
