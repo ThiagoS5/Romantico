@@ -145,7 +145,7 @@ export const reasons = [
         },
         {
           title: 'Estou programando um servidor de RDR2',
-          description: 'Sim, vou entrar no mundo do RP',
+          description: 'Sim, vou entrar no mundo do RP e se quiser, podemos ser um casal lá também!',
         },
       ],
     },
@@ -157,7 +157,7 @@ export const reasons = [
     bubblePreview: 'Talvez o próximo poema tenha o seu nome.',
     title: 'Algumas coisas eu consigo dizer melhor escrevendo',
     introduction:
-      'Eu existo entre uma poesia e outra, mas a verdade é que os versos mais bonitos nunca surgem do nada — eles vêm quando a mente desacelera e o coração bate mais forte, ou quando alguma emoção transborda. A poesia me faz sentir nu perante a vida, sujeito às estações do ano.',
+      'Eu existo entre uma poesia e outra, mas a verdade é que os versos mais bonitos nunca surgem do nada; Eles vêm quando a mente desacelera e o coração bate mais forte, ou quando alguma emoção transborda. A poesia me faz sentir nu perante a vida, sujeito às estações do ano.',
     paragraphs: [
       'Organizar a bagunça dos meus sentimentos e transformar o que eu sinto é o que me faz ser escritor.',
       'Não sei, mas meu próximo poema provavelmente vai nascer de algo que eu descobrir sobre você. Das manias bobas, do som do seu riso, de um simples olhar, uma frase solta ou de uma conversa no meio da noite.',
