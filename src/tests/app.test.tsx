@@ -124,6 +124,15 @@ describe('ocean invitation', () => {
     await waitFor(() => expect(screen.getByRole('button', { name: 'Exibir imagem 2 de 7' })).toHaveAttribute('aria-current', 'true'))
   })
 
+  it('includes the oracle and tarot images in the Talentos carousel', async () => {
+    renderRoute('/motivos/talentos')
+
+    await expectDialogVisible()
+    expect(screen.getByRole('region', { name: /Fotos de Talentos/i })).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Exibir imagem 1 de 6' })).toHaveAttribute('aria-current', 'true')
+    expect(screen.getByRole('button', { name: 'Exibir imagem 6 de 6' })).toBeVisible()
+  })
+
   it('uses the real image proportions in the Sites adaptive gallery', async () => {
     renderRoute('/motivos/sites')
 

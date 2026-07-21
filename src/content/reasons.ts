@@ -401,6 +401,20 @@ export const reasons = [
         alt: 'Demonstração de uma unha sendo pintada.',
         caption: 'Eu mostrando meu talento pintando unha',
       },
+      {
+        id: 'talents-oracle',
+        aspect: 'landscape',
+        src: '/talento/oraculo.png',
+        alt: 'Cartas do oráculo Angelarium dispostas para uma leitura.',
+        caption: 'Angelarium é um dos oráculos mais lindos que já li',
+      },
+      {
+        id: 'talents-tarot',
+        aspect: 'portrait',
+        src: '/talento/tarot.jpeg',
+        alt: 'Carta de tarot escolhida durante uma leitura.',
+        caption: 'Pera... vamos ser felizes?',
+      },
     ],
     mediaPresentation: 'carousel',
     specialContent: {
