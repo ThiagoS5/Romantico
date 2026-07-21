@@ -435,6 +435,10 @@ export const reasons = [
           label: 'Sei fazer uma IV',
           items: ['Sei fazer uma IV e já salvei um cachorrinho no sítio.'],
         },
+        {
+          label: 'Sei jogar tarot e outros oráculos',
+          items: ['Posso te ajudar a interpretar seu mapa astral ou responder perguntas! Sim... sou místico.'],
+        },
       ],
     },
     specialContentPosition: 'after-media',
